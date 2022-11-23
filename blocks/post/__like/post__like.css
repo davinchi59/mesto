@@ -1,0 +1,11 @@
+.post__like {
+	width: 22px;
+	height: 19px;
+	background: none;
+	background-image: url('../../../images/like.svg');
+	border: none;
+}
+
+.post__like:hover {
+	opacity: 0.5;
+}
