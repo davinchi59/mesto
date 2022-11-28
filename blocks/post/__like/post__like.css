@@ -4,6 +4,7 @@
 	background: none;
 	background-image: url('../../../images/like.svg');
 	border: none;
+	cursor: pointer;
 }
 
 .post__like:hover {

@@ -11,6 +11,7 @@
 	box-sizing: border-box;
 	margin-top: 48px;
 	transition: all 0.1s ease;
+	cursor: pointer;
 }
 
 .popup__save-btn:hover {
