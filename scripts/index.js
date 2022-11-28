@@ -7,27 +7,24 @@ const popupInputNameEl = document.querySelector('.popup__input_type_name')
 const popupInputDescrEl = document.querySelector('.popup__input_type_descr')
 const popupSaveBtnEl = document.querySelector('.popup__save-btn')
 
-profileEditBtnEl.addEventListener('click', (evt) => {
-	evt.preventDefault()
-	togglePopup(true)
-})
-
-popupCloseBtnEl.addEventListener('click', (evt) => {
-	evt.preventDefault()
-	togglePopup(false)
-})
-
-popupSaveBtnEl.addEventListener('click', (evt) => {
-	evt.preventDefault()
-	profileNameEl.textContent = popupInputNameEl.value
-	profileDescrEl.textContent = popupInputDescrEl.value
-	togglePopup(false)
-})
-
-function togglePopup(isShow) {
+function togglePopup() {
+	popupEl.classList.toggle('popup_opened')
+	const isShow = popupEl.classList.contains('popup_opened')
 	if (isShow) {
 		popupInputNameEl.value = profileNameEl.textContent
 		popupInputDescrEl.value = profileDescrEl.textContent
-		popupEl.classList.add('popup_opened')
-	} else popupEl.classList.remove('popup_opened')
+	}
 }
+
+function saveProfile(evt) {
+	profileNameEl.textContent = popupInputNameEl.value
+	profileDescrEl.textContent = popupInputDescrEl.value
+	evt.preventDefault()
+	togglePopup()
+}
+
+profileEditBtnEl.addEventListener('click', togglePopup)
+
+popupCloseBtnEl.addEventListener('click', togglePopup)
+
+popupSaveBtnEl.addEventListener('click', saveProfile)

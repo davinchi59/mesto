@@ -30,20 +30,19 @@
 					<div class="profile__info">
 						<div class="profile__row">
 							<h1 class="profile__name">Жак-Ив Кусто</h1>
-							<img
-								class="profile__edit-btn"
-								src="./images/edit.svg"
-								alt="Кнопка редактирования профиля"
-							/>
+							<button class="profile__edit-btn" type="button">
+								<img
+									src="./images/edit.svg"
+									alt="Кнопка редактирования профиля"
+								/>
+							</button>
 						</div>
 						<p class="profile__description">Исследователь океана</p>
 					</div>
 
-					<img
-						class="profile__add-btn"
-						src="./images/plus.svg"
-						alt="Кнопка добавления поста"
-					/>
+					<button class="profile__add-btn" type="button">
+						<img src="./images/plus.svg" alt="Кнопка добавления поста" />
+					</button>
 				</section>
 
 				<section class="posts">
@@ -55,7 +54,7 @@
 						/>
 						<div class="post__controls">
 							<h2 class="post__title">Карачаевск</h2>
-							<button class="post__like"></button>
+							<button class="post__like" type="button"></button>
 						</div>
 					</article>
 					<article class="post">
@@ -66,7 +65,10 @@
 						/>
 						<div class="post__controls">
 							<h2 class="post__title">Гора Эльбрус</h2>
-							<button class="post__like post__like_active"></button>
+							<button
+								class="post__like post__like_active"
+								type="button"
+							></button>
 						</div>
 					</article>
 					<article class="post">
@@ -77,7 +79,7 @@
 						/>
 						<div class="post__controls">
 							<h2 class="post__title">Домбай</h2>
-							<button class="post__like"></button>
+							<button class="post__like" type="button"></button>
 						</div>
 					</article>
 					<article class="post">
@@ -88,7 +90,7 @@
 						/>
 						<div class="post__controls">
 							<h2 class="post__title">Гора Эльбрус</h2>
-							<button class="post__like"></button>
+							<button class="post__like" type="button"></button>
 						</div>
 					</article>
 					<article class="post">
@@ -99,7 +101,7 @@
 						/>
 						<div class="post__controls">
 							<h2 class="post__title">Домбай</h2>
-							<button class="post__like"></button>
+							<button class="post__like" type="button"></button>
 						</div>
 					</article>
 					<article class="post">
@@ -110,7 +112,7 @@
 						/>
 						<div class="post__controls">
 							<h2 class="post__title">Карачаево-Черкесский</h2>
-							<button class="post__like"></button>
+							<button class="post__like" type="button"></button>
 						</div>
 					</article>
 				</section>
@@ -122,23 +124,27 @@
 		</div>
 
 		<div class="popup">
-			<form class="popup__container">
-				<button class="popup__close-btn"></button>
-				<h3 class="popup__title">Редактировать профиль</h3>
-				<input
-					class="popup__input popup__input_type_name"
-					type="text"
-					placeholder="Имя"
-				/>
-				<input
-					class="popup__input popup__input_type_descr"
-					type="text"
-					placeholder="О себе"
-				/>
-				<button class="popup__save-btn">Сохранить</button>
-			</form>
+			<div class="popup__container">
+				<button class="popup__close-btn" type="button"></button>
+				<h2 class="popup__title">Редактировать профиль</h2>
+				<form name="profileEdit">
+					<input
+						class="popup__input popup__input_type_name"
+						type="text"
+						placeholder="Имя"
+						name="name"
+					/>
+					<input
+						class="popup__input popup__input_type_descr"
+						type="text"
+						placeholder="О себе"
+						name="description"
+					/>
+					<button class="popup__save-btn" type="submit">Сохранить</button>
+				</form>
+			</div>
 		</div>
 
-		<script src="./script.js"></script>
+		<script src="./scripts/index.js"></script>
 	</body>
 </html>
