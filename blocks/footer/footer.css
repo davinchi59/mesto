@@ -8,5 +8,7 @@
 	.footer {
 		padding-top: 48px;
 		padding-left: 19px;
+		font-size: 14px;
+		line-height: 14px;
 	}
 }
