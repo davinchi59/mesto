@@ -5,7 +5,7 @@ const popupEl = document.querySelector('.popup')
 const popupCloseBtnEl = document.querySelector('.popup__close-btn')
 const popupInputNameEl = document.querySelector('.popup__input_type_name')
 const popupInputDescrEl = document.querySelector('.popup__input_type_descr')
-const popupSaveBtnEl = document.querySelector('.popup__save-btn')
+const popupFormEl = document.querySelector('.popup__form')
 
 function togglePopup() {
 	popupEl.classList.toggle('popup_opened')
@@ -27,4 +27,4 @@ profileEditBtnEl.addEventListener('click', togglePopup)
 
 popupCloseBtnEl.addEventListener('click', togglePopup)
 
-popupSaveBtnEl.addEventListener('click', saveProfile)
+popupFormEl.addEventListener('submit', saveProfile)
