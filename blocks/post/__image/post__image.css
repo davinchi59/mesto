@@ -4,4 +4,6 @@
 	background-size: cover;
 	background-position: 50%;
 	background-repeat: no-repeat;
+	border-radius: 10px 10px 0 0;
+	cursor: pointer;
 }

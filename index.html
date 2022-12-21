@@ -50,77 +50,7 @@
 					</button>
 				</section>
 
-				<section class="posts">
-					<article class="post">
-						<img
-							class="post__image"
-							src="./images/img_0.png"
-							alt="Фото Карачаевска"
-						/>
-						<div class="post__controls">
-							<h2 class="post__title">Карачаевск</h2>
-							<button class="post__like" type="button"></button>
-						</div>
-					</article>
-					<article class="post">
-						<img
-							class="post__image"
-							src="./images/img_1.png"
-							alt="Фото Эльбруса"
-						/>
-						<div class="post__controls">
-							<h2 class="post__title">Гора Эльбрус</h2>
-							<button
-								class="post__like post__like_active"
-								type="button"
-							></button>
-						</div>
-					</article>
-					<article class="post">
-						<img
-							class="post__image"
-							src="./images/img_2.png"
-							alt="Фото Домбая"
-						/>
-						<div class="post__controls">
-							<h2 class="post__title">Домбай</h2>
-							<button class="post__like" type="button"></button>
-						</div>
-					</article>
-					<article class="post">
-						<img
-							class="post__image"
-							src="./images/img_1.png"
-							alt="Фото Эльбруса"
-						/>
-						<div class="post__controls">
-							<h2 class="post__title">Гора Эльбрус</h2>
-							<button class="post__like" type="button"></button>
-						</div>
-					</article>
-					<article class="post">
-						<img
-							class="post__image"
-							src="./images/img_2.png"
-							alt="Фото Домбая"
-						/>
-						<div class="post__controls">
-							<h2 class="post__title">Домбай</h2>
-							<button class="post__like" type="button"></button>
-						</div>
-					</article>
-					<article class="post">
-						<img
-							class="post__image"
-							src="./images/img_0.png"
-							alt="Фото Карачаево-Черкесского"
-						/>
-						<div class="post__controls">
-							<h2 class="post__title">Карачаево-Черкесский</h2>
-							<button class="post__like" type="button"></button>
-						</div>
-					</article>
-				</section>
+				<section class="posts"></section>
 			</main>
 
 			<footer class="footer">
@@ -128,7 +58,7 @@
 			</footer>
 		</div>
 
-		<div class="popup">
+		<div class="popup popup_type_edit-profile">
 			<div class="popup__container">
 				<button class="popup__close-btn" type="button"></button>
 				<h2 class="popup__title">Редактировать профиль</h2>
@@ -149,6 +79,47 @@
 				</form>
 			</div>
 		</div>
+
+		<div class="popup popup_type_add-post">
+			<div class="popup__container">
+				<button class="popup__close-btn" type="button"></button>
+				<h2 class="popup__title">Новое место</h2>
+				<form name="addPost" class="popup__form">
+					<input
+						class="popup__input popup__input_type_place"
+						type="text"
+						placeholder="Название"
+						name="place"
+					/>
+					<input
+						class="popup__input popup__input_type_link"
+						type="text"
+						placeholder="Ссылка на картинку"
+						name="link"
+					/>
+					<button class="popup__save-btn" type="submit">Создать</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="popup popup_type_image">
+			<div class="popup__image-container">
+				<img class="popup__image" src="" alt="" />
+				<button class="popup__close-btn" type="button"></button>
+				<p class="popup__image-title"></p>
+			</div>
+		</div>
+
+		<template id="post">
+			<article class="post">
+				<img class="post__image" src="" alt="" />
+				<div class="post__controls">
+					<h2 class="post__title"></h2>
+					<button class="post__like" type="button"></button>
+				</div>
+				<button class="post__remove" type="button"></button>
+			</article>
+		</template>
 
 		<script src="./scripts/index.js"></script>
 	</body>

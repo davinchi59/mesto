@@ -3,6 +3,9 @@
 	height: 100vh;
 	position: fixed;
 	inset: 0;
+	display: flex;
 	background-color: #0007;
-	display: none;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s ease 0.5s, opacity 0.5s ease;
 }
