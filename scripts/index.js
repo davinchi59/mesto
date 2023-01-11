@@ -23,19 +23,7 @@ const postAddInputLink = postAddForm.querySelector('.popup__input_type_link')
 const popupImageElement = popupImage.querySelector('.popup__image')
 const popupImageTitle = popupImage.querySelector('.popup__image-title')
 
-const popupCloseElements = [
-	...Array.from(document.querySelectorAll('.popup__close-btn')),
-	...Array.from(document.querySelectorAll('.popup__overlay')),
-]
-
-const VALIDATE_SETTINGS = {
-	formSelector: '.popup__form',
-	inputSelector: '.popup__input',
-	submitButtonSelector: '.popup__save-btn',
-	inactiveButtonClass: 'popup__save-btn_inactive',
-	inputErrorClass: 'popup__input_invalid',
-	errorClass: 'popup__error_active',
-}
+const popups = Array.from(document.querySelectorAll('.popup'))
 
 const templatePost = document
 	.querySelector('#post')
@@ -49,20 +37,7 @@ function openPopup(popup) {
 	openedPopup = popup
 	document.addEventListener('keydown', handleKeyDown)
 	popup.classList.add('popup_opened')
-	const formElement = popup.querySelector(VALIDATE_SETTINGS.formSelector)
-	if (!formElement) return
-	const buttonElement = formElement.querySelector(
-		VALIDATE_SETTINGS.submitButtonSelector
-	)
-	if (!buttonElement) return
-	const inputList = Array.from(
-		formElement.querySelectorAll(VALIDATE_SETTINGS.inputSelector)
-	)
-	toggleSubmitButtonState(
-		inputList,
-		buttonElement,
-		VALIDATE_SETTINGS.inactiveButtonClass
-	)
+	togglePopupFormSubmitButtonState(popup)
 }
 function closePopup(popup) {
 	openedPopup = null
@@ -78,10 +53,10 @@ function handleSubmitProfileEditForm(evt) {
 }
 
 function handleSubmitAddPostForm(evt) {
-	const name = postAddInputName.value
-	const link = postAddInputLink.value
-	posts.prepend(getCardMurkup(name, link))
+	console.log('qweqw')
 	evt.preventDefault()
+	postAddForm.reset()
+	posts.prepend(getCardMurkup({ postAddInputName, postAddInputLink }))
 	closePopup(popupAddPost)
 }
 
@@ -92,14 +67,18 @@ function handleProfileEditButtonClick() {
 }
 
 function handlePostAddButtonClick() {
-	postAddInputName.value = ''
-	postAddInputLink.value = ''
+	postAddForm.reset()
 	openPopup(popupAddPost)
 }
 
-function handlePopupCloseClick(evt) {
-	evt.stopPropagation()
-	closePopup(evt.target.closest('.popup'))
+function handlePopupClick(evt) {
+	if (
+		evt.target.classList.contains('popup') ||
+		evt.target.classList.contains('popup__close-btn')
+	) {
+		evt.stopPropagation()
+		closePopup(evt.currentTarget)
+	}
 }
 
 function getCardMurkup({ name, link }) {
@@ -123,9 +102,7 @@ function getCardMurkup({ name, link }) {
 		evt.target.classList.toggle('post__like_active')
 	)
 	const removeButton = card.querySelector('.post__remove')
-	removeButton.addEventListener('click', (evt) =>
-		evt.target.closest('.post').remove()
-	)
+	removeButton.addEventListener('click', (evt) => card.remove())
 
 	return card
 }
@@ -133,7 +110,8 @@ function getCardMurkup({ name, link }) {
 function handleKeyDown({ key }) {
 	switch (key) {
 		case 'Escape':
-			return closePopup(openedPopup)
+			closePopup(openedPopup)
+			break
 	}
 }
 
@@ -141,9 +119,7 @@ profileEditButton.addEventListener('click', handleProfileEditButtonClick)
 
 postAddButton.addEventListener('click', handlePostAddButtonClick)
 
-popupCloseElements.forEach((el) =>
-	el.addEventListener('click', handlePopupCloseClick)
-)
+popups.forEach((popup) => popup.addEventListener('click', handlePopupClick))
 
 profileEditForm.addEventListener('submit', handleSubmitProfileEditForm)
 postAddForm.addEventListener('submit', handleSubmitAddPostForm)
