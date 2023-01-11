@@ -73,7 +73,6 @@ function enableValidation({
 		toggleSubmitButtonState(inputList, buttonElement, inactiveButtonClass)
 		inputList.forEach((inputElement) => {
 			inputElement.addEventListener('input', () => {
-				console.log('qweqwe')
 				checkInputValidity(
 					formElement,
 					inputElement,
