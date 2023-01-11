@@ -59,54 +59,79 @@
 		</div>
 
 		<div class="popup popup_type_edit-profile">
+			<div class="popup__overlay"></div>
 			<div class="popup__container">
 				<button class="popup__close-btn" type="button"></button>
 				<h2 class="popup__title">Редактировать профиль</h2>
-				<form name="profileEdit" class="popup__form">
-					<input
-						class="popup__input popup__input_type_name"
-						type="text"
-						placeholder="Имя"
-						name="name"
-						required
-					/>
-					<input
-						class="popup__input popup__input_type_descr"
-						type="text"
-						placeholder="О себе"
-						name="description"
-						required
-					/>
+				<form name="profileEdit" class="popup__form" novalidate>
+					<label for="name" class="popup__input-block">
+						<input
+							class="popup__input popup__input_type_name"
+							type="text"
+							placeholder="Имя"
+							name="name"
+							id="profileEditName"
+							required
+							minlength="2"
+							maxlength="40"
+						/>
+						<p class="popup__error profileEditName-error"></p>
+					</label>
+					<label for="name" class="popup__input-block">
+						<input
+							class="popup__input popup__input_type_descr"
+							type="text"
+							placeholder="О себе"
+							name="description"
+							id="profileEditDescription"
+							required
+							minlength="2"
+							maxlength="200"
+						/>
+						<p class="popup__error profileEditDescription-error"></p>
+					</label>
 					<button class="popup__save-btn" type="submit">Сохранить</button>
 				</form>
 			</div>
 		</div>
 
 		<div class="popup popup_type_add-post">
+			<div class="popup__overlay"></div>
 			<div class="popup__container">
 				<button class="popup__close-btn" type="button"></button>
 				<h2 class="popup__title">Новое место</h2>
-				<form name="addPost" class="popup__form">
-					<input
-						class="popup__input popup__input_type_place"
-						type="text"
-						placeholder="Название"
-						name="place"
-						required
-					/>
-					<input
-						class="popup__input popup__input_type_link"
-						type="url"
-						placeholder="Ссылка на картинку"
-						name="link"
-						required
-					/>
+				<form name="addPost" class="popup__form" novalidate>
+					<label for="name" class="popup__input-block">
+						<input
+							class="popup__input popup__input_type_place"
+							type="text"
+							placeholder="Название"
+							name="place"
+							id="addPostPlace"
+							required
+							minlength="2"
+							maxlength="30"
+						/>
+						<p class="popup__error addPostPlace-error"></p>
+					</label>
+					<label for="name" class="popup__input-block">
+						<input
+							class="popup__input popup__input_type_link"
+							type="url"
+							placeholder="Ссылка на картинку"
+							name="link"
+							id="addPostLink"
+							required
+						/>
+						<p class="popup__error addPostLink-error"></p>
+					</label>
 					<button class="popup__save-btn" type="submit">Создать</button>
 				</form>
 			</div>
 		</div>
 
 		<div class="popup popup_type_image">
+			<div class="popup__overlay"></div>
 			<div class="popup__image-container">
 				<img class="popup__image" src="#" alt="" />
 				<button class="popup__close-btn" type="button"></button>
@@ -126,6 +151,7 @@
 		</template>
 
 		<script src="./scripts/cards.js"></script>
+		<script src="./scripts/validate.js"></script>
 		<script src="./scripts/index.js"></script>
 	</body>
 </html>

@@ -23,7 +23,19 @@ const postAddInputLink = postAddForm.querySelector('.popup__input_type_link')
 const popupImageElement = popupImage.querySelector('.popup__image')
 const popupImageTitle = popupImage.querySelector('.popup__image-title')
 
-const popupCloseButtons = document.querySelectorAll('.popup__close-btn')
+const popupCloseElements = [
+	...Array.from(document.querySelectorAll('.popup__close-btn')),
+	...Array.from(document.querySelectorAll('.popup__overlay')),
+]
+
+const VALIDATE_SETTINGS = {
+	formSelector: '.popup__form',
+	inputSelector: '.popup__input',
+	submitButtonSelector: '.popup__save-btn',
+	inactiveButtonClass: 'popup__save-btn_inactive',
+	inputErrorClass: 'popup__input_invalid',
+	errorClass: 'popup__error_active',
+}
 
 const templatePost = document
 	.querySelector('#post')
@@ -31,10 +43,30 @@ const templatePost = document
 
 const posts = document.querySelector('.posts')
 
+let openedPopup = null
+
 function openPopup(popup) {
+	openedPopup = popup
+	document.addEventListener('keydown', handleKeyDown)
 	popup.classList.add('popup_opened')
+	const formElement = popup.querySelector(VALIDATE_SETTINGS.formSelector)
+	if (!formElement) return
+	const buttonElement = formElement.querySelector(
+		VALIDATE_SETTINGS.submitButtonSelector
+	)
+	if (!buttonElement) return
+	const inputList = Array.from(
+		formElement.querySelectorAll(VALIDATE_SETTINGS.inputSelector)
+	)
+	toggleSubmitButtonState(
+		inputList,
+		buttonElement,
+		VALIDATE_SETTINGS.inactiveButtonClass
+	)
 }
 function closePopup(popup) {
+	openedPopup = null
+	document.removeEventListener('keydown', handleKeyDown)
 	popup.classList.remove('popup_opened')
 }
 
@@ -65,7 +97,8 @@ function handlePostAddButtonClick() {
 	openPopup(popupAddPost)
 }
 
-function handlePopupCloseButtonClick(evt) {
+function handlePopupCloseClick(evt) {
+	evt.stopPropagation()
 	closePopup(evt.target.closest('.popup'))
 }
 
@@ -97,15 +130,24 @@ function getCardMurkup({ name, link }) {
 	return card
 }
 
+function handleKeyDown({ key }) {
+	switch (key) {
+		case 'Escape':
+			return closePopup(openedPopup)
+	}
+}
+
 profileEditButton.addEventListener('click', handleProfileEditButtonClick)
 
 postAddButton.addEventListener('click', handlePostAddButtonClick)
 
-popupCloseButtons.forEach((el) =>
-	el.addEventListener('click', handlePopupCloseButtonClick)
+popupCloseElements.forEach((el) =>
+	el.addEventListener('click', handlePopupCloseClick)
 )
 
 profileEditForm.addEventListener('submit', handleSubmitProfileEditForm)
 postAddForm.addEventListener('submit', handleSubmitAddPostForm)
 
 initialCards.forEach((card) => posts.append(getCardMurkup(card)))
+
+enableValidation(VALIDATE_SETTINGS)
