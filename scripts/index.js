@@ -55,8 +55,9 @@ function handleSubmitProfileEditForm(evt) {
 function handleSubmitAddPostForm(evt) {
 	console.log('qweqw')
 	evt.preventDefault()
+	const cardData = { name: postAddInputName, link: postAddInputLink }
+	posts.prepend(getCardMurkup(cardData))
 	postAddForm.reset()
-	posts.prepend(getCardMurkup({ postAddInputName, postAddInputLink }))
 	closePopup(popupAddPost)
 }
 
@@ -76,7 +77,6 @@ function handlePopupClick(evt) {
 		evt.target.classList.contains('popup') ||
 		evt.target.classList.contains('popup__close-btn')
 	) {
-		evt.stopPropagation()
 		closePopup(evt.currentTarget)
 	}
 }
