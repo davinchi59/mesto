@@ -1,10 +1,9 @@
-import { openCardPopup } from './utils.js'
-
 export default class Card {
-	constructor({ name, link, templateSelector }) {
+	constructor({ name, link, templateSelector, handleCardClick }) {
 		this._name = name
 		this._link = link
 		this._templateSelector = templateSelector
+		this._handleCardClick = handleCardClick
 	}
 
 	_getTemplate() {
@@ -15,12 +14,8 @@ export default class Card {
 		return cardElement
 	}
 
-	_handleOpenPopup() {
-		openCardPopup({ name: this._name, link: this._link })
-	}
-
-	_toggleLikeButton(buttonElement) {
-		buttonElement.classList.toggle('post__like_active')
+	_toggleLikeButton() {
+		this._likeButtonElement.classList.toggle('post__like_active')
 	}
 
 	_removeElement() {
@@ -28,12 +23,12 @@ export default class Card {
 	}
 
 	_setEventListeners() {
-		const image = this._element.querySelector('.post__image')
-		image.addEventListener('click', () => this._handleOpenPopup())
+		this._imageElement.addEventListener('click', () =>
+			this._handleCardClick(this._name, this._link)
+		)
 
-		const likeButton = this._element.querySelector('.post__like')
-		likeButton.addEventListener('click', (evt) =>
-			this._toggleLikeButton(evt.target)
+		this._likeButtonElement.addEventListener('click', () =>
+			this._toggleLikeButton()
 		)
 
 		const removeButton = this._element.querySelector('.post__remove')
@@ -42,10 +37,11 @@ export default class Card {
 
 	getMarkup() {
 		this._element = this._getTemplate()
+		this._imageElement = this._element.querySelector('.post__image')
+		this._likeButtonElement = this._element.querySelector('.post__like')
 		this._setEventListeners()
-		const imageElement = this._element.querySelector('.post__image')
-		imageElement.src = this._link
-		imageElement.alt = this._name
+		this._imageElement.src = this._link
+		this._imageElement.alt = this._name
 		this._element.querySelector('.post__title').textContent = this._name
 		return this._element
 	}

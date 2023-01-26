@@ -29,6 +29,19 @@ const popups = Array.from(document.querySelectorAll('.popup'))
 
 const posts = document.querySelector('.posts')
 
+const formValidators = {}
+
+const popupImage = document.querySelector('.popup_type_image')
+const popupImageElement = popupImage.querySelector('.popup__image')
+const popupImageTitle = popupImage.querySelector('.popup__image-title')
+
+function handleCardClick(name, link) {
+	popupImageElement.src = link
+	popupImageElement.alt = name
+	popupImageTitle.textContent = name
+	openPopup(popupImage)
+}
+
 function handleSubmitProfileEditForm(evt) {
 	profileName.textContent = profileEditInputName.value
 	profileDescriprion.textContent = profileEditInputDescription.value
@@ -50,11 +63,13 @@ function handleSubmitAddPostForm(evt) {
 function handleProfileEditButtonClick() {
 	profileEditInputName.value = profileName.textContent
 	profileEditInputDescription.value = profileDescriprion.textContent
+	formValidators[profileEditForm.getAttribute('name')].resetValidation()
 	openPopup(popupEditProfile)
 }
 
 function handlePostAddButtonClick() {
 	postAddForm.reset()
+	formValidators[postAddForm.getAttribute('name')].resetValidation()
 	openPopup(popupAddPost)
 }
 
@@ -68,7 +83,12 @@ function handlePopupClick(evt) {
 }
 
 function getCardMurkup({ name, link }) {
-	const card = new Card({ name, link, templateSelector: '#post' })
+	const card = new Card({
+		name,
+		link,
+		templateSelector: '#post',
+		handleCardClick,
+	})
 	return card.getMarkup()
 }
 
@@ -91,3 +111,18 @@ forms.forEach((formElement) => {
 	})
 	validator.enableValidation()
 })
+
+function enableValidation(settings) {
+	const formList = Array.from(document.querySelectorAll(settings.formSelector))
+	formList.forEach((formElement) => {
+		const validator = new FormValidator({
+			settings,
+			formElement,
+		})
+		const formName = formElement.getAttribute('name')
+		formValidators[formName] = validator
+		validator.enableValidation()
+	})
+}
+
+enableValidation(VALIDATE_SETTINGS)
