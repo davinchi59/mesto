@@ -1,3 +1,9 @@
+import initialCards from './cards.js'
+import Card from './Card.js'
+import { openPopup, closePopup } from './utils.js'
+import { VALIDATE_SETTINGS } from './constants.js'
+import FormValidator from './FormValidator.js'
+
 const profileName = document.querySelector('.profile__name')
 const profileDescriprion = document.querySelector('.profile__description')
 
@@ -6,7 +12,6 @@ const postAddButton = document.querySelector('.profile__add-btn')
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile')
 const popupAddPost = document.querySelector('.popup_type_add-post')
-const popupImage = document.querySelector('.popup_type_image')
 
 const profileEditForm = popupEditProfile.querySelector('.popup__form')
 const profileEditInputName = profileEditForm.querySelector(
@@ -20,30 +25,9 @@ const postAddForm = popupAddPost.querySelector('.popup__form')
 const postAddInputName = postAddForm.querySelector('.popup__input_type_place')
 const postAddInputLink = postAddForm.querySelector('.popup__input_type_link')
 
-const popupImageElement = popupImage.querySelector('.popup__image')
-const popupImageTitle = popupImage.querySelector('.popup__image-title')
-
 const popups = Array.from(document.querySelectorAll('.popup'))
 
-const templatePost = document
-	.querySelector('#post')
-	.content.querySelector('.post')
-
 const posts = document.querySelector('.posts')
-
-let openedPopup = null
-
-function openPopup(popup) {
-	openedPopup = popup
-	document.addEventListener('keydown', handleKeyDown)
-	popup.classList.add('popup_opened')
-	togglePopupFormSubmitButtonState(popup)
-}
-function closePopup(popup) {
-	openedPopup = null
-	document.removeEventListener('keydown', handleKeyDown)
-	popup.classList.remove('popup_opened')
-}
 
 function handleSubmitProfileEditForm(evt) {
 	profileName.textContent = profileEditInputName.value
@@ -53,9 +37,11 @@ function handleSubmitProfileEditForm(evt) {
 }
 
 function handleSubmitAddPostForm(evt) {
-	console.log('qweqw')
 	evt.preventDefault()
-	const cardData = { name: postAddInputName, link: postAddInputLink }
+	const cardData = {
+		name: postAddInputName.value,
+		link: postAddInputLink.value,
+	}
 	posts.prepend(getCardMurkup(cardData))
 	postAddForm.reset()
 	closePopup(popupAddPost)
@@ -82,37 +68,8 @@ function handlePopupClick(evt) {
 }
 
 function getCardMurkup({ name, link }) {
-	const card = templatePost.cloneNode(true)
-
-	const image = card.querySelector('.post__image')
-	image.src = link
-	image.alt = name
-	image.addEventListener('click', () => {
-		popupImageElement.src = link
-		popupImageElement.alt = name
-		popupImageTitle.textContent = name
-		openPopup(popupImage)
-	})
-
-	const title = card.querySelector('.post__title')
-	title.textContent = name
-
-	const likeButton = card.querySelector('.post__like')
-	likeButton.addEventListener('click', (evt) =>
-		evt.target.classList.toggle('post__like_active')
-	)
-	const removeButton = card.querySelector('.post__remove')
-	removeButton.addEventListener('click', (evt) => card.remove())
-
-	return card
-}
-
-function handleKeyDown({ key }) {
-	switch (key) {
-		case 'Escape':
-			closePopup(openedPopup)
-			break
-	}
+	const card = new Card({ name, link, templateSelector: '#post' })
+	return card.getMarkup()
 }
 
 profileEditButton.addEventListener('click', handleProfileEditButtonClick)
@@ -126,4 +83,11 @@ postAddForm.addEventListener('submit', handleSubmitAddPostForm)
 
 initialCards.forEach((card) => posts.append(getCardMurkup(card)))
 
-enableValidation(VALIDATE_SETTINGS)
+const forms = [profileEditForm, postAddForm]
+forms.forEach((formElement) => {
+	const validator = new FormValidator({
+		settings: VALIDATE_SETTINGS,
+		formElement,
+	})
+	validator.enableValidation()
+})
