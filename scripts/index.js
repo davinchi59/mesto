@@ -103,15 +103,6 @@ postAddForm.addEventListener('submit', handleSubmitAddPostForm)
 
 initialCards.forEach((card) => posts.append(getCardMurkup(card)))
 
-const forms = [profileEditForm, postAddForm]
-forms.forEach((formElement) => {
-	const validator = new FormValidator({
-		settings: VALIDATE_SETTINGS,
-		formElement,
-	})
-	validator.enableValidation()
-})
-
 function enableValidation(settings) {
 	const formList = Array.from(document.querySelectorAll(settings.formSelector))
 	formList.forEach((formElement) => {
