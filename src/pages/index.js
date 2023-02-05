@@ -46,7 +46,7 @@ const popupTypeEditProfile = new PopupWithForm(
 	(values) => {
 		userInfo.setUserInfo(values)
 	},
-	formValidators.profileEdit.resetValidation
+	formValidators.profileEdit.resetValidation.bind(formValidators.profileEdit)
 )
 
 const popupTypeAddPost = new PopupWithForm(
@@ -61,7 +61,7 @@ const popupTypeAddPost = new PopupWithForm(
 		const cardElement = card.getMarkup()
 		cardList.addItem(cardElement)
 	},
-	formValidators.addPost.resetValidation
+	formValidators.addPost.resetValidation.bind(formValidators.addPost)
 )
 
 profileEditButton.addEventListener('click', () => {
