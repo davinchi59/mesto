@@ -1,3 +1,6 @@
+export const profileEditButton = document.querySelector('.profile__edit-btn')
+export const profileAddPost = document.querySelector('.profile__add-btn')
+
 export const VALIDATE_SETTINGS = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__input',

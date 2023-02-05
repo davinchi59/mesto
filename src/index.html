@@ -7,8 +7,6 @@
 			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		/>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link rel="stylesheet" href="./pages/index.css" />
-		<script src="./scripts/index.js" defer type="module"></script>
 		<title>Mesto</title>
 	</head>
 	<body class="page">
@@ -16,7 +14,7 @@
 			<header class="header">
 				<img
 					class="header__logo"
-					src="./images/header__logo.svg"
+					src="<%=require('./images/header__logo.svg')%>"
 					alt="Логотип 'Mesto Russia'"
 				/>
 			</header>
@@ -25,7 +23,7 @@
 				<section class="profile">
 					<img
 						class="profile__avatar"
-						src="./images/avatar.png"
+						src="<%=require('./images/avatar.png')%>"
 						alt="Аватар профиля"
 					/>
 					<div class="profile__info">
@@ -34,7 +32,7 @@
 							<button class="profile__edit-btn" type="button">
 								<img
 									class="profile__edit-icon"
-									src="./images/edit.svg"
+									src="<%=require('./images/edit.svg')%>"
 									alt="Кнопка редактирования профиля"
 								/>
 							</button>
@@ -45,7 +43,7 @@
 					<button class="profile__add-btn" type="button">
 						<img
 							class="profile__add-icon"
-							src="./images/plus.svg"
+							src="<%=require('./images/plus.svg')%>"
 							alt="Кнопка добавления поста"
 						/>
 					</button>
