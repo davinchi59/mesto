@@ -24,14 +24,8 @@ const userInfo = new UserInfo({
 const cardList = new Section(
 	{
 		items: initialCards,
-		renderer: ({ name, link }) => {
-			const card = new Card({
-				name,
-				link,
-				templateSelector: '#post',
-				handleCardClick,
-			})
-			const cardElement = card.getMarkup()
+		renderer: (item) => {
+			const cardElement = createCard(item)
 			cardList.addItem(cardElement)
 		},
 	},
@@ -52,13 +46,7 @@ const popupTypeEditProfile = new PopupWithForm(
 const popupTypeAddPost = new PopupWithForm(
 	'.popup_type_add-post',
 	({ place, link }) => {
-		const card = new Card({
-			name: place,
-			link,
-			templateSelector: '#post',
-			handleCardClick,
-		})
-		const cardElement = card.getMarkup()
+		const cardElement = createCard({ name: place, link })
 		cardList.addItem(cardElement)
 	},
 	formValidators.addPost.resetValidation.bind(formValidators.addPost)
@@ -72,6 +60,17 @@ profileAddPost.addEventListener('click', () => popupTypeAddPost.open())
 
 function handleCardClick(cardData) {
 	popupTypeImage.open(cardData)
+}
+
+function createCard({ name, link }) {
+	const card = new Card({
+		name,
+		link,
+		templateSelector: '#post',
+		handleCardClick,
+	})
+	const cardElement = card.getMarkup()
+	return cardElement
 }
 
 function enableValidation(settings) {
