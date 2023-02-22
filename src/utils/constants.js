@@ -1,5 +1,6 @@
 export const profileEditButton = document.querySelector('.profile__edit-btn')
 export const profileAddPost = document.querySelector('.profile__add-btn')
+export const avatarEditButton = document.querySelector('.avatar__edit')
 
 export const VALIDATE_SETTINGS = {
 	formSelector: '.popup__form',
@@ -12,4 +13,9 @@ export const VALIDATE_SETTINGS = {
 
 export const KEYS = {
 	ESC: 'Escape',
+}
+
+export const SUBMIT_BUTTON_STATE = {
+	Idle: 'idle',
+	Loading: 'loading',
 }

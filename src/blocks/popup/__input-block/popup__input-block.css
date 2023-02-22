@@ -5,6 +5,9 @@
 	display: block;
 }
 
+.popup__input-block:last-of-type {
+	margin-bottom: 10px;
+}
 .popup__input-block:not(:last-of-type) {
 	margin-bottom: 30px;
 }

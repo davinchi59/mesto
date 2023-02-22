@@ -1,10 +1,13 @@
 .post__like {
 	width: 22px;
-	height: 19px;
 	background: none;
 	background-image: url('../../../images/like.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
 	border: none;
 	cursor: pointer;
+	padding-top: 22px;
+	font-size: 13px;
 }
 
 .post__like:hover {
