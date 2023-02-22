@@ -43,7 +43,10 @@ async function startApp() {
 				.finally(() => updateButtonText(SUBMIT_BUTTON_STATE.Idle))
 		},
 		formValidators.profileEdit.resetValidation.bind(formValidators.profileEdit),
-		{ idle: 'Сохранить', loading: 'Сохранение...' }
+		{
+			[SUBMIT_BUTTON_STATE.Idle]: 'Сохранить',
+			[SUBMIT_BUTTON_STATE.Loading]: 'Сохранение...',
+		}
 	)
 
 	const popupTypeAddPost = new PopupWithForm(
@@ -59,7 +62,10 @@ async function startApp() {
 				.finally(() => updateButtonText(SUBMIT_BUTTON_STATE.Idle))
 		},
 		formValidators.addPost.resetValidation.bind(formValidators.addPost),
-		{ idle: 'Создать', loading: 'Создание...' }
+		{
+			[SUBMIT_BUTTON_STATE.Idle]: 'Создать',
+			[SUBMIT_BUTTON_STATE.Loading]: 'Создание...',
+		}
 	)
 
 	const popupTypeDeleteConfirm = new PopupConfirm('.popup_type_delete-confirm')
@@ -79,7 +85,10 @@ async function startApp() {
 		formValidators.updateAvatar.resetValidation.bind(
 			formValidators.updateAvatar
 		),
-		{ idle: 'Сохранить', loading: 'Сохранение...' }
+		{
+			[SUBMIT_BUTTON_STATE.Idle]: 'Сохранить',
+			[SUBMIT_BUTTON_STATE.Loading]: 'Сохранение...',
+		}
 	)
 
 	const userInfo = new UserInfo({
