@@ -68,7 +68,13 @@ async function startApp() {
 		}
 	)
 
-	const popupTypeDeleteConfirm = new PopupConfirm('.popup_type_delete-confirm')
+	const popupTypeDeleteConfirm = new PopupConfirm(
+		'.popup_type_delete-confirm',
+		{
+			[SUBMIT_BUTTON_STATE.Idle]: 'Да',
+			[SUBMIT_BUTTON_STATE.Loading]: 'Удаление...',
+		}
+	)
 
 	const popupTypeUpdateAvatar = new PopupWithForm(
 		'.popup_type_update-avatar',
@@ -144,11 +150,15 @@ async function startApp() {
 	}
 
 	function handleCardDelete(cardId, deleteCard) {
-		popupTypeDeleteConfirm.open(() => {
+		popupTypeDeleteConfirm.open((updateButtonText, close) => {
 			api
 				.deleteCard(cardId)
-				.then(deleteCard)
+				.then(() => {
+					deleteCard()
+					close()
+				})
 				.catch((error) => console.log(error))
+				.finally(() => updateButtonText(SUBMIT_BUTTON_STATE.Idle))
 		})
 	}
 
